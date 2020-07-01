@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{%  block content %}
+
+	<!-- Filter form section -->
+	<div class="filter-search">
+		<div class="container">
+			<form class="filter-form" action="{% url 'search' %}"  method="GET" >
+                {% csrf_token %}
+				<input type="text" placeholder="Enter a street name, address number or keyword", name="keywords">
+                <label>city:</label>
+				<select name="city">
+					<option value="">------</option>
+                    {% for city in cities %}
+					<option value="{{city}}">{{city}}</option>
+                    {% endfor %}
+				</select>
+                <label>state:</label>
+				<select name="state">
+					<option value="">------</option>
+                    {% for state in states%}
+					<option value="{{state}}">{{state}}</option>
+                    {% endfor %}
+				</select>
+				<button class="site-btn fs-submit">SEARCH</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- feature section -->
+	<section class="feature-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>Featured Listings</h3>
+				<p>Browse houses and flats for sale and to rent in your area</p>
+			</div>
+			<div class="row">
+				{% if properties %}
+				{% for property in properties %}
+				{% include 'partials/_property.html' %}
+				{% endfor %}
+				{% else %}
+					 <div class="section-title text-center">
+						<h3>No Properties Listings</h3>
+					 </div>
+				{% endif%}
+
+			</div>
+		</div>
+	</section>
+	<!-- feature section end -->
+
+	<!-- Review section -->
+	<section class="review-section set-bg" data-setbg="{% static 'img/review-bg.jpg' %}">
+		<div class="container">
+			<div class="review-slider owl-carousel">
+				<div class="review-item text-white">
+					<div class="rating">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+					<p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
+					<h5>Stacy Mc Neeley</h5>
+					<span>CEP’s Director</span>
+					<div class="clint-pic set-bg" data-setbg="{% static 'img/review/1.jpg' %}"></div>
+				</div>
+				<div class="review-item text-white">
+					<div class="rating">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+					<p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
+					<h5>Stacy Mc Neeley</h5>
+					<span>CEP’s Director</span>
+					<div class="clint-pic set-bg" data-setbg="{% static 'img/review/1.jpg' %}"></div>
+				</div>
+				<div class="review-item text-white">
+					<div class="rating">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+					<p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
+					<h5>Stacy Mc Neeley</h5>
+					<span>CEP’s Director</span>
+					<div class="clint-pic set-bg" data-setbg="{% static 'img/review/1.jpg' %}"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Review section end-->
+
+
+	<!-- Services section -->
+      {% include 'partials/_service.html' %}
+	<!-- Services section end -->
+
+
+	<!-- Clients section -->
+	<div class="clients-section">
+		<div class="container">
+            <br>
+            <center> <h5 >OUR CLIENTS:</h5></center>
+			<div class="clients-slider owl-carousel">
+				<a href="#">
+					<img src="{% static 'img/partner/1.png' %}" alt="">
+				</a>
+				<a href="#">
+					<img src="{% static 'img/partner/2.png' %}" alt="">
+				</a>
+				<a href="#">
+					<img src="{% static 'img/partner/3.png' %}" alt="">
+				</a>
+				<a href="#">
+					<img src="{% static 'img/partner/4.png' %}" alt="">
+				</a>
+				<a href="#">
+					<img src="{% static 'img/partner/5.png' %}" alt="">
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Clients section end -->
+
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<!-- Breadcrumb -->
+
+<br>
+	<div class="site-breadcrumb">
+		<div class="container">
+			<a href=""><i class="fa fa-home"></i>Home</a>
+			<span><i class="fa fa-angle-right"></i>Single Listing</span>
+		</div>
+	</div>
+	<!-- Page -->
+	<section class="page-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 single-list-page">
+					<div class="single-list-slider owl-carousel" id="sl-slider">
+						{% if property.photo_main %}
+                        <div class="sl-item set-bg" data-setbg="{{property.photo_main.url}}">
+							<!--<div class="rent-notic">FOR Rent</div>-->
+						</div>
+                        {% endif %}
+                        {% if property.photo_1 %}
+						<div class="sl-item set-bg" data-setbg="{{property.photo_1.url}}">
+							<!--<div class="sale-notic">FOR SALE</div>-->
+						</div>
+                        {% endif %}
+                        {% if property.photo_2 %}
+						<div class="sl-item set-bg" data-setbg="{{property.photo_2.url}}">
+							<!--<div class="rent-notic">FOR Rent</div>-->
+						</div>
+                        {% endif %}
+                        {% if property.photo_3 %}
+						<div class="sl-item set-bg" data-setbg="{{property.photo_3.url}}">
+							<!--<div class="sale-notic">FOR SALE</div>-->
+						</div>
+                        {% endif %}
+						 {% if property.photo_4 %}
+						<div class="sl-item set-bg" data-setbg="{{property.photo_4.url}}">
+							<!--<div class="sale-notic">FOR SALE</div>-->
+						</div>
+                        {% endif %}
+					</div>
+					<div class="owl-carousel sl-thumb-slider" id="sl-slider-thumb">
+                        {% if property.photo_main %}
+						<div class="sl-thumb set-bg" data-setbg="{{property.photo_main.url}}"></div>
+                        {% endif %}
+                        {% if property.photo_1 %}
+						<div class="sl-thumb set-bg" data-setbg="{{property.photo_1.url}}"></div>
+                        {% endif %}
+						{% if property.photo_2 %}
+                        <div class="sl-thumb set-bg" data-setbg="{{property.photo_2.url}}"></div>
+						{% endif %}
+                        {% if property.photo_3 %}
+                        <div class="sl-thumb set-bg" data-setbg="{{property.photo_3.url}}"></div>
+						{% endif %}
+                        {% if property.photo_4 %}
+                        <div class="sl-thumb set-bg" data-setbg="{{property.photo_4.url}}"></div>
+					    {% endif %}
+                    </div>
+					<div class="single-list-content">
+						<div class="row">
+							<div class="col-xl-8 sl-title">
+								<h2>{{property.name}}</h2>
+								<p><i class="fa fa-map-marker"></i>{{property.city}}, {{property.address}}, ({{property.state}})</p>
+							</div>
+							<div class="col-xl-4">
+								<a href="#" class="price-btn">RS.{{property.price | intcomma }}</a>
+							</div>
+						</div>
+						<h3 class="sl-sp-title">Property Details</h3>
+						<div class="row property-details-list">
+							<div class="col-md-4 col-sm-6">
+								<p><i class="fa fa-th-large"></i> {{property.sqft}} Square foot</p>
+								<p><i class="fa fa-bed"></i> {{property.bedrooms}} Bedrooms</p>
+								<p><i class="fa fa-user"></i> {{property.profile}}</p>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<p><i class="fa fa-car"></i>  {{property.garage}} Garages</p>
+								<p><i class="fa fa-building-o"></i> Family Villa</p>
+								<p><i class="fa fa-clock-o"></i> {{property.list_date | timesince }} </p>
+							</div>
+							<div class="col-md-4">
+								<p><i class="fa fa-bath"></i> {{property.bathrooms}}Bathrooms</p>
+								<p><i class="fa fa-trophy"></i> 5 years age</p>
+							</div>
+						</div>
+
+						<h3 class="sl-sp-title">Description</h3>
+						<div class="description">
+							{% if property.description %}
+							<p>{{property.description}}</p>
+							{% else %}
+							<p>No description for this property.</p>
+							{% endif %}
+							</div>
+
+
+						<!--<h3 class="sl-sp-title">Property Details</h3>-->
+						<!--<div class="row property-details-list">-->
+							<!--<div class="col-md-4 col-sm-6">-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Air conditioning</p>-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Telephone</p>-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Laundry Room</p>-->
+							<!--</div>-->
+							<!--<div class="col-md-4 col-sm-6">-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Central Heating</p>-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Family Villa</p>-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Metro Central</p>-->
+							<!--</div>-->
+							<!--<div class="col-md-4">-->
+								<!--<p><i class="fa fa-check-circle-o"></i> City views</p>-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Internet</p>-->
+								<!--<p><i class="fa fa-check-circle-o"></i> Electric Range</p>-->
+							<!--</div>-->
+						<!--</div>-->
+                    </div>
+                </div>
+
+				<div class="col-lg-4 col-md-7 sidebar">
+					<div class="author-card">
+						<div class="author-img set-bg" data-setbg="{{property.profile.photo.url}}"></div>
+						<div class="author-info">
+							<h5>{{property.profile}}</h5>
+							<p>Real Estate Agent</p>
+						</div>
+						<div class="author-contact">
+							<p><i class="fa fa-phone"></i>{{property.profile.phone_number}}</p>
+							<p><i class="fa fa-envelope"></i>{{property.profile.email}}</p>
+						</div>
+					</div>
+					{% if user.is_authenticated %}
+					{% if user.is_seller %}
+					{% else %}
+					<div class="contact-form-card">
+						<h5>Do you have any enquiry?</h5>
+						<form method="post" action="{% url 'contact' %}">
+							{% csrf_token %}
+							<input type="hidden" placeholder="Property name" value="{{property.id}}" name="prop_id">
+							<input type="hidden" placeholder="Property name" value="{{user.id}}"  name="buyer_id">
+							<input type="hidden" placeholder="Property name" value="{{property.profile.id}}"  name="seller_id">
+							<input type="text" placeholder="Property name" value="{{property.name}}" name="property_name">
+							<input type="text" placeholder="Your name" value="{{user}}" name="user">
+							<input type="text" placeholder="Your email" value="{{user.email}}" name="email">
+							<input type="hidden" placeholder="Your email" value="{{property.profile.email}}" name="seller_email">
+							<input type="text" placeholder="Your number" value="{{user.phone_number}}" name="phone">
+							<textarea name="message" placeholder="Your question"></textarea>
+							<button>SEND ENQUIRY</button>
+						</form>
+					</div>
+					{% endif %}
+					{% else %}
+					<form method="post" action="{% url 'login' %}">
+					{% csrf_token %}
+					<button class="btn btn-info">MAKE ENQUIRE</button>
+					<form>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page end -->
+
+{% endblock %}
